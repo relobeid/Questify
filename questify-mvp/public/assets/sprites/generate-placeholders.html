@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sprite Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    canvas { border: 1px solid #999; margin: 10px 0; }
+    button { padding: 10px 15px; margin: 10px 5px; }
+  </style>
+</head>
+<body>
+  <h1>Placeholder Sprite Generator</h1>
+  <p>Click the buttons below to generate and download placeholder sprites.</p>
+  
+  <h2>Player Sprite</h2>
+  <canvas id="playerCanvas" width="64" height="64"></canvas>
+  <br>
+  <button onclick="generatePlayerSprite()">Generate Player Sprite</button>
+  <button onclick="downloadPlayerSprite()">Download Player Sprite</button>
+  
+  <h2>Enemy Sprite</h2>
+  <canvas id="enemyCanvas" width="64" height="64"></canvas>
+  <br>
+  <button onclick="generateEnemySprite()">Generate Enemy Sprite</button>
+  <button onclick="downloadEnemySprite()">Download Enemy Sprite</button>
+  
+  <script>
+    function generatePlayerSprite() {
+      const canvas = document.getElementById('playerCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw player body
+      ctx.fillStyle = '#3498db';
+      ctx.fillRect(16, 10, 32, 44);
+      
+      // Draw head
+      ctx.fillStyle = '#e74c3c';
+      ctx.fillRect(22, 4, 20, 20);
+      
+      // Draw face
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(26, 10, 4, 4);
+      ctx.fillRect(34, 10, 4, 4);
+      ctx.fillRect(30, 18, 4, 2);
+    }
+    
+    function generateEnemySprite() {
+      const canvas = document.getElementById('enemyCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw enemy body
+      ctx.fillStyle = '#9b59b6';
+      ctx.beginPath();
+      ctx.arc(32, 32, 25, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw eyes
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(24, 24, 5, 0, Math.PI * 2);
+      ctx.arc(40, 24, 5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw pupils
+      ctx.fillStyle = '#000000';
+      ctx.beginPath();
+      ctx.arc(24, 24, 2, 0, Math.PI * 2);
+      ctx.arc(40, 24, 2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw mouth
+      ctx.beginPath();
+      ctx.arc(32, 40, 10, 0, Math.PI);
+      ctx.stroke();
+    }
+    
+    function downloadPlayerSprite() {
+      const canvas = document.getElementById('playerCanvas');
+      const link = document.createElement('a');
+      link.download = 'player_placeholder.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    function downloadEnemySprite() {
+      const canvas = document.getElementById('enemyCanvas');
+      const link = document.createElement('a');
+      link.download = 'enemy_placeholder.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    // Generate sprites on page load
+    window.onload = function() {
+      generatePlayerSprite();
+      generateEnemySprite();
+    }
+  </script>
+</body>
+</html> 
